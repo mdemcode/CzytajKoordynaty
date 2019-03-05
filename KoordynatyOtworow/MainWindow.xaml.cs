@@ -12,17 +12,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using AutoCAD;
 
 namespace KoordynatyOtworow
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e)
+        {
+            //RysunekElementu rys = new RysunekElementu();
+            CzytajKoordynaty odczyt = new CzytajKoordynaty();
+            MessageBox.Show("Odczyt w MainWindow");
+            foreach (AcadCircle otwor in odczyt.TablicaOtworow)
+            {
+                try
+                {
+                    MessageBox.Show(otwor.Diameter.ToString());
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show(e1.Message);
+                }
+            }
         }
     }
 }
