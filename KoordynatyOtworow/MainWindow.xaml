@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoordynatyOtworow"
         mc:Ignorable="d"
-        Title="Koordynaty Otworów" Height="450" Width="800">
+        Title="Koordynaty Otworów" Height="450" Width="700">
     <Grid>
-        <Button x:Name="ButtonCzytajKoordynaty" Height="50" Width="150" Click="ButtonCzytajKoordynaty_Click">Czytaj Koordynaty</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.7*" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <DataGrid x:Name="DG_Otwory" Grid.Column="0" Margin="50" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Średnica" Binding="{Binding Srednica}"/>
+                <DataGridTextColumn Width="*" Header="Pozycja X" Binding="{Binding PozX}"/>
+                <DataGridTextColumn Width="*" Header="Pozycja Y" Binding="{Binding PozY}"/>
+                <DataGridTextColumn Width="*" Header="Pozycja Z" Binding="{Binding PozZ}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <StackPanel Grid.Column="1">
+            <Button x:Name="ButtonCzytajKoordynaty" Height="50" Width="150" Margin="50" Click="ButtonCzytajKoordynaty_Click">Czytaj Koordynaty</Button>
+        </StackPanel>
     </Grid>
 </Window>

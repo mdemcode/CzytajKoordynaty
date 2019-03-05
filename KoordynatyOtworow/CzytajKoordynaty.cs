@@ -23,7 +23,7 @@ namespace KoordynatyOtworow {
         public CzytajKoordynaty() {
             if (Przechwyc_AutoCAD()) {
                 if (Otworz_Rysunek()) {
-                    Petla_Glowna();
+                    Wczytaj_Koordynaty();
                 }
             }
         }
@@ -64,6 +64,7 @@ namespace KoordynatyOtworow {
 
         private string PodajAdresRysunku() {
             OpenFileDialog oknoDialogowe = new OpenFileDialog {
+                Title = "Wskaż rysunek:",
                 Filter = "Pliki DWG (*.dwg)|*.dwg",
                 InitialDirectory = "\\\\Pmssdlc16\\z1\\1ST\\"
             };
@@ -72,7 +73,8 @@ namespace KoordynatyOtworow {
             }
             else return null;
         }
-        public void Petla_Glowna() {                          
+
+        public void Wczytaj_Koordynaty() {                          
             try {
                 TablicaOtworow = new List<Otwor>();
                 AcadSelectionSet zestaw_el = rysunek_ACAD.SelectionSets.Add("zestaw_el");
@@ -90,18 +92,8 @@ namespace KoordynatyOtworow {
                     }
                 }
                 rysunek_ACAD.Close(false);
-                foreach (Otwor otw in TablicaOtworow)
-                {
-                    MessageBox.Show(
-                          "Średnica: " + otw.Srednica.ToString()+" \n"
-                        + "Poz.X: " + otw.PozX.ToString()+ " \n" 
-                        + "Poz.Y: " + otw.PozY.ToString()+ " \n"
-                        + "Poz.Z: " + otw.PozZ.ToString()
-                    );
-                }
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 MessageBox.Show(e.Message);
             }
         }

@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KoordynatyOtworow
 {
     struct Otwor
     {
-        public double Srednica;
-        public double PozX;
-        public double PozY;
-        public double PozZ;
+        public double Srednica { get; set; }
+        public double PozX { get; set; }
+        public double PozY { get; set; }
+        public double PozZ { get; set; }
 
         public Otwor(double fi, double x, double y, double z) {
-            Srednica = Math.Round(fi,1);
-            PozX = Math.Round(x,1);
-            PozY = Math.Round(y,1);
-            PozZ = Math.Round(z,1);
+            Srednica = Zaokr.Zaokr_05(fi); //Math.Round(fi,1);
+            PozX = Zaokr.Zaokr_05(x);   //Math.Round(x,1);
+            PozY = Zaokr.Zaokr_05(y);   //Math.Round(y,1);
+            PozZ = Zaokr.Zaokr_05(z);   //Math.Round(z,1);
         }
     }
 }

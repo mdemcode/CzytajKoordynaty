@@ -17,25 +17,17 @@ using AutoCAD;
 
 namespace KoordynatyOtworow
 {
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+    public partial class MainWindow : Window {
+
+        public MainWindow() {
             InitializeComponent();
         }
 
-        private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e)
-        {
+        private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e) {
             CzytajKoordynaty odczyt = new CzytajKoordynaty();
-            MessageBox.Show("W MainWindow:");
-            foreach (Otwor otwor in odczyt.TablicaOtworow)
-            {
-                try {
-                    MessageBox.Show(otwor.Srednica.ToString());
-                }
-                catch (Exception e1) {
-                    MessageBox.Show(e1.Message);
-                }
+            if (odczyt.TablicaOtworow!=null) {
+                //foreach (Otwor ot in odczyt.TablicaOtworow) MessageBox.Show(ot.Srednica.ToString());
+                DG_Otwory.ItemsSource = odczyt.TablicaOtworow;
             }
         }
     }
