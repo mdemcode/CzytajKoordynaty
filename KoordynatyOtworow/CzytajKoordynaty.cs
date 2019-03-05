@@ -14,23 +14,17 @@ namespace KoordynatyOtworow {
     class CzytajKoordynaty {
 
         #region POLA KLASY
-        //private readonly string dane_rysunku;
         private AcadApplication acadApp;
         private AcadDocument rysunek_ACAD;
-        public List<AcadCircle> TablicaOtworow;
-        
-        //public ObservableCollection<AcadCircle> TablicaOtworow { get; set; }
+        //public List<AcadCircle> TablicaOtworow;
         #endregion
 
         #region KONSTRUKTOR
         public CzytajKoordynaty() {
             if (Przechwyc_AutoCAD()) {
-                //dane_rysunku = rysunek;
                 if (Otworz_Rysunek()) {
-                    //acadApp.WindowState = AcWindowState.acMax;
-                    Petla_Glowna();
-                    rysunek_ACAD.Close(false);
-                    //acadApp.WindowState = AcWindowState.acMin;
+                    //Petla_Glowna();
+                    //rysunek_ACAD.Close(false);
                 }
             }
         }
@@ -77,9 +71,9 @@ namespace KoordynatyOtworow {
             }
             else return null;
         }
-        private void Petla_Glowna() {                          
+        public List<AcadCircle> Petla_Glowna() {                          
             try {
-                TablicaOtworow = new List<AcadCircle>();
+                List<AcadCircle> TablicaOtworow = new List<AcadCircle>();
                 AcadSelectionSet zestaw_el = rysunek_ACAD.SelectionSets.Add("zestaw_el");
                 zestaw_el.Select(AcSelect.acSelectionSetAll);
                 foreach (AcadEntity element in zestaw_el) {
@@ -87,6 +81,7 @@ namespace KoordynatyOtworow {
                         TablicaOtworow.Add((AcadCircle)element);
                     }
                 }
+                //rysunek_ACAD.Close(false);
                 foreach (AcadCircle otw in TablicaOtworow)
                 {
                     MessageBox.Show(
@@ -96,10 +91,12 @@ namespace KoordynatyOtworow {
                         + "Poz.Z: " + otw.Center[2].ToString()
                     );
                 }
+                return TablicaOtworow;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                return null;
             }
         }
         #endregion

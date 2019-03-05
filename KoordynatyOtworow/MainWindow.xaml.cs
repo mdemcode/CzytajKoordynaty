@@ -26,17 +26,13 @@ namespace KoordynatyOtworow
 
         private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e)
         {
-            //RysunekElementu rys = new RysunekElementu();
             CzytajKoordynaty odczyt = new CzytajKoordynaty();
-            MessageBox.Show("Odczyt w MainWindow");
-            foreach (AcadCircle otwor in odczyt.TablicaOtworow)
+            foreach (AcadCircle otwor in odczyt.Petla_Glowna())
             {
-                try
-                {
+                try {
                     MessageBox.Show(otwor.Diameter.ToString());
                 }
-                catch (Exception e1)
-                {
+                catch (Exception e1) {
                     MessageBox.Show(e1.Message);
                 }
             }
