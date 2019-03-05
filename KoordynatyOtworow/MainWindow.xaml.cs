@@ -27,10 +27,11 @@ namespace KoordynatyOtworow
         private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e)
         {
             CzytajKoordynaty odczyt = new CzytajKoordynaty();
-            foreach (AcadCircle otwor in odczyt.Petla_Glowna())
+            MessageBox.Show("W MainWindow:");
+            foreach (Otwor otwor in odczyt.TablicaOtworow)
             {
                 try {
-                    MessageBox.Show(otwor.Diameter.ToString());
+                    MessageBox.Show(otwor.Srednica.ToString());
                 }
                 catch (Exception e1) {
                     MessageBox.Show(e1.Message);

@@ -16,15 +16,14 @@ namespace KoordynatyOtworow {
         #region POLA KLASY
         private AcadApplication acadApp;
         private AcadDocument rysunek_ACAD;
-        //public List<AcadCircle> TablicaOtworow;
+        public List<Otwor> TablicaOtworow;
         #endregion
 
         #region KONSTRUKTOR
         public CzytajKoordynaty() {
             if (Przechwyc_AutoCAD()) {
                 if (Otworz_Rysunek()) {
-                    //Petla_Glowna();
-                    //rysunek_ACAD.Close(false);
+                    Petla_Glowna();
                 }
             }
         }
@@ -50,6 +49,7 @@ namespace KoordynatyOtworow {
                 }
             }
         }
+
         private bool Otworz_Rysunek() {
             try {
             AcadDocuments listaRys = acadApp.Documents;
@@ -61,6 +61,7 @@ namespace KoordynatyOtworow {
                 return false;
             }
         }
+
         private string PodajAdresRysunku() {
             OpenFileDialog oknoDialogowe = new OpenFileDialog {
                 Filter = "Pliki DWG (*.dwg)|*.dwg",
@@ -71,32 +72,37 @@ namespace KoordynatyOtworow {
             }
             else return null;
         }
-        public List<AcadCircle> Petla_Glowna() {                          
+        public void Petla_Glowna() {                          
             try {
-                List<AcadCircle> TablicaOtworow = new List<AcadCircle>();
+                TablicaOtworow = new List<Otwor>();
                 AcadSelectionSet zestaw_el = rysunek_ACAD.SelectionSets.Add("zestaw_el");
                 zestaw_el.Select(AcSelect.acSelectionSetAll);
-                foreach (AcadEntity element in zestaw_el) {
-                    if (element.Layer=="frezarka") {
-                        TablicaOtworow.Add((AcadCircle)element);
+                foreach (AcadEntity el in zestaw_el) {
+                    if (el.Layer=="frezarka") {
+                        AcadCircle element = (AcadCircle)el;
+                        Otwor otw = new Otwor(
+                            element.Diameter,
+                            element.Center[0],
+                            element.Center[1],
+                            element.Center[2]
+                            );
+                        TablicaOtworow.Add(otw);
                     }
                 }
-                //rysunek_ACAD.Close(false);
-                foreach (AcadCircle otw in TablicaOtworow)
+                rysunek_ACAD.Close(false);
+                foreach (Otwor otw in TablicaOtworow)
                 {
                     MessageBox.Show(
-                          "Średnica: " + otw.Diameter.ToString()+" \n"
-                        + "Poz.X: " + otw.Center[0].ToString()+ " \n" 
-                        + "Poz.Y: " + otw.Center[1].ToString()+ " \n"
-                        + "Poz.Z: " + otw.Center[2].ToString()
+                          "Średnica: " + otw.Srednica.ToString()+" \n"
+                        + "Poz.X: " + otw.PozX.ToString()+ " \n" 
+                        + "Poz.Y: " + otw.PozY.ToString()+ " \n"
+                        + "Poz.Z: " + otw.PozZ.ToString()
                     );
                 }
-                return TablicaOtworow;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-                return null;
             }
         }
         #endregion

@@ -15,9 +15,9 @@ namespace KoordynatyOtworow
 
         public Otwor(double fi, double x, double y, double z) {
             Srednica = Math.Round(fi,1);
-            PozX = Math.Round(x);
-            PozY = Math.Round(y);
-            PozZ = Math.Round(z);
+            PozX = Math.Round(x,1);
+            PozY = Math.Round(y,1);
+            PozZ = Math.Round(z,1);
         }
     }
 }
