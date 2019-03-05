@@ -11,7 +11,7 @@
             <ColumnDefinition Width="1.7*" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <DataGrid x:Name="DG_Otwory" Grid.Column="0" Margin="50" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Średnica" Binding="{Binding Srednica}"/>
@@ -20,9 +20,15 @@
                 <DataGridTextColumn Width="*" Header="Pozycja Z" Binding="{Binding PozZ}"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <StackPanel Grid.Column="1">
             <Button x:Name="ButtonCzytajKoordynaty" Height="50" Width="150" Margin="50" Click="ButtonCzytajKoordynaty_Click">Czytaj Koordynaty</Button>
         </StackPanel>
+        <Grid x:Name="grid_info" Visibility="Hidden" >
+            <Label x:Name="LabelLaduje" Height="400" Width="500" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="24" FontStyle="Italic">
+            <Image Source="cloud.png"/>
+        </Label>
+        <TextBlock  Height="50" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="24" FontStyle="Italic"> Czekaj, ładuję ...</TextBlock>
+        </Grid>
     </Grid>
 </Window>

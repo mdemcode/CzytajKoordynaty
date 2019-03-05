@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using AutoCAD;
+using Microsoft.Win32;
 
 namespace KoordynatyOtworow
 {
@@ -24,11 +24,28 @@ namespace KoordynatyOtworow
         }
 
         private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e) {
-            CzytajKoordynaty odczyt = new CzytajKoordynaty();
-            if (odczyt.TablicaOtworow!=null) {
-                //foreach (Otwor ot in odczyt.TablicaOtworow) MessageBox.Show(ot.Srednica.ToString());
-                DG_Otwory.ItemsSource = odczyt.TablicaOtworow;
+            grid_info.Visibility = Visibility.Visible;
+            string adres = PodajAdresRysunku();
+            if (adres != null) {
+                CzytajKoordynaty odczyt = new CzytajKoordynaty(adres);
+                if (odczyt.TablicaOtworow != null) {
+                    DG_Otwory.ItemsSource = odczyt.TablicaOtworow;
+                }
             }
+            grid_info.Visibility = Visibility.Hidden;
         }
+
+        private string PodajAdresRysunku() {
+            OpenFileDialog oknoDialogowe = new OpenFileDialog {
+                Title = "Wskaż rysunek:",
+                Filter = "Pliki DWG (*.dwg)|*.dwg",
+                InitialDirectory = "\\\\Pmssdlc16\\z1\\1ST\\"
+            };
+            if (oknoDialogowe.ShowDialog() == true) {
+                return oknoDialogowe.FileName;
+            }
+            else return null;
+        }
+
     }
 }

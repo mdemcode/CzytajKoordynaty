@@ -20,9 +20,9 @@ namespace KoordynatyOtworow {
         #endregion
 
         #region KONSTRUKTOR
-        public CzytajKoordynaty() {
+        public CzytajKoordynaty(string adresRys) {
             if (Przechwyc_AutoCAD()) {
-                if (Otworz_Rysunek()) {
+                if (Otworz_Rysunek(adresRys)) {
                     Wczytaj_Koordynaty();
                 }
             }
@@ -50,28 +50,16 @@ namespace KoordynatyOtworow {
             }
         }
 
-        private bool Otworz_Rysunek() {
+        private bool Otworz_Rysunek(string adr) {
             try {
             AcadDocuments listaRys = acadApp.Documents;
-            rysunek_ACAD = listaRys.Open(PodajAdresRysunku());
+            rysunek_ACAD = listaRys.Open(adr);
                 return true;
             }
             catch {
                 MessageBox.Show("Nie udało się otworzyć rysunku! \n Spróbuj jeszcze raz.");
                 return false;
             }
-        }
-
-        private string PodajAdresRysunku() {
-            OpenFileDialog oknoDialogowe = new OpenFileDialog {
-                Title = "Wskaż rysunek:",
-                Filter = "Pliki DWG (*.dwg)|*.dwg",
-                InitialDirectory = "\\\\Pmssdlc16\\z1\\1ST\\"
-            };
-            if (oknoDialogowe.ShowDialog() == true) {
-                return oknoDialogowe.FileName;
-            }
-            else return null;
         }
 
         public void Wczytaj_Koordynaty() {                          
@@ -94,6 +82,7 @@ namespace KoordynatyOtworow {
                 rysunek_ACAD.Close(false);
             }
             catch (Exception e) {
+                rysunek_ACAD.Close(false);
                 MessageBox.Show(e.Message);
             }
         }
