@@ -42,10 +42,15 @@ namespace KoordynatyOtworow
                 InitialDirectory = "\\\\Pmssdlc16\\z1\\1ST\\"
             };
             if (oknoDialogowe.ShowDialog() == true) {
+                TBplikRys.Text = "Plik rys.: " + oknoDialogowe.FileName;
                 return oknoDialogowe.FileName;
             }
             else return null;
         }
 
+        private void ButtonZapiszDoPliku_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

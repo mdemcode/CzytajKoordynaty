@@ -12,7 +12,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid x:Name="DG_Otwory" Grid.Column="0" Margin="50" AutoGenerateColumns="False">
+        <DataGrid x:Name="DG_Otwory" Grid.Column="0" Margin="50,30,50,70" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="0.8*" Header="Nr otw." Binding="{Binding Nr}"/>
                 <DataGridTextColumn Width="*" Header="Średnica" Binding="{Binding Srednica}"/>
@@ -23,8 +23,8 @@
         </DataGrid>
 
         <StackPanel Grid.Column="1">
-            <Button x:Name="ButtonCzytajKoordynaty" Height="50" Width="150" Margin="0,50,0,0" Click="ButtonCzytajKoordynaty_Click">Czytaj Koordynaty</Button>
-            <Button x:Name="ButtonZapiszDoPliku" Height="50" Width="150" Margin="0,30,0,0" >Zapisz do pliku</Button>
+            <Button x:Name="ButtonCzytajKoordynaty" Height="50" Width="150" Margin="0,30,0,0" Click="ButtonCzytajKoordynaty_Click">Czytaj Koordynaty</Button>
+            <Button x:Name="ButtonZapiszDoPliku" Height="50" Width="150" Margin="0,30,0,0" Click="ButtonZapiszDoPliku_Click" >Zapisz do pliku</Button>
         </StackPanel>
         <Grid x:Name="grid_info" Visibility="Hidden" >
             <Label x:Name="LabelLaduje" Height="400" Width="500" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="24" FontStyle="Italic">
@@ -32,5 +32,6 @@
         </Label>
         <TextBlock  Height="50" Width="215" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="24" FontStyle="Italic"> Czekaj, odczytuję ...</TextBlock>
         </Grid>
+        <TextBlock x:Name="TBplikRys" Margin="20,370,20,10">Plik rysunku:</TextBlock>
     </Grid>
 </Window>

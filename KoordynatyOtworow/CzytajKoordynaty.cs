@@ -68,13 +68,9 @@ namespace KoordynatyOtworow {
                 short i = 1;
                 AcadSelectionSet zestaw_el = rysunek_ACAD.SelectionSets.Add("zestaw_el");
                 Int16[] typ_filtra = new short[2] { 0, 8 };
-                //typ_filtra[0] = 0;
                 object[] dane_filtra = new object[2] { "Circle", "frezarka" };
-                //dane_filtra[0]= "Circle";
                 zestaw_el.Select(AcSelect.acSelectionSetAll,null,null, typ_filtra, dane_filtra);
                 foreach (AcadCircle el in zestaw_el) {
-                    //if (el.Layer=="frezarka") {
-                        //AcadCircle element = (AcadCircle)el;
                         Otwor otw = new Otwor(
                             i,
                             el.Diameter,
@@ -84,7 +80,6 @@ namespace KoordynatyOtworow {
                             );
                         TablicaOtworow.Add(otw);
                         i++;
-                    //}
                 }
                 rysunek_ACAD.Close(false);
             }
