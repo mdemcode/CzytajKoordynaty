@@ -14,10 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
+using System.IO;
 
 namespace KoordynatyOtworow
 {
     public partial class MainWindow : Window {
+
+        private string AdresRysunku;
+        private CzytajKoordynaty odczyt;
 
         public MainWindow() {
             InitializeComponent();
@@ -25,9 +29,9 @@ namespace KoordynatyOtworow
 
         private void ButtonCzytajKoordynaty_Click(object sender, RoutedEventArgs e) {
             grid_info.Visibility = Visibility.Visible;
-            string adres = PodajAdresRysunku();
-            if (adres != null) {
-                CzytajKoordynaty odczyt = new CzytajKoordynaty(adres);
+            PodajAdresRysunku();
+            if (AdresRysunku != null) {
+                odczyt = new CzytajKoordynaty(AdresRysunku);
                 if (odczyt.TablicaOtworow != null) {
                     DG_Otwory.ItemsSource = odczyt.TablicaOtworow;
                 }
@@ -35,7 +39,7 @@ namespace KoordynatyOtworow
             grid_info.Visibility = Visibility.Hidden;
         }
 
-        private string PodajAdresRysunku() {
+        private void PodajAdresRysunku() {
             OpenFileDialog oknoDialogowe = new OpenFileDialog {
                 Title = "Wskaż rysunek:",
                 Filter = "Pliki DWG (*.dwg)|*.dwg",
@@ -43,14 +47,22 @@ namespace KoordynatyOtworow
             };
             if (oknoDialogowe.ShowDialog() == true) {
                 TBplikRys.Text = "Plik rys.: " + oknoDialogowe.FileName;
-                return oknoDialogowe.FileName;
+                AdresRysunku = oknoDialogowe.FileName;
             }
-            else return null;
         }
 
-        private void ButtonZapiszDoPliku_Click(object sender, RoutedEventArgs e)
-        {
-
+        private void ButtonZapiszDoPliku_Click(object sender, RoutedEventArgs e) {
+            string plik = AdresRysunku.Substring(AdresRysunku.LastIndexOf('\\') + 1, AdresRysunku.Length - AdresRysunku.LastIndexOf('\\')-1);
+            string plik1= "C:\\Users\\demianczukm\\Desktop\\PROTON\\" + plik + ".h";
+            if (!File.Exists(plik1)) {
+                StreamWriter sw = File.CreateText(plik1);
+                foreach (Otwor otw in odczyt.TablicaOtworow)
+                {
+                    sw.WriteLine("Otw. " + otw.Nr + ":   Średnica: " + otw.Srednica + "   X: " + otw.PozX + "   Y: " + otw.PozY + "   Z: " + otw.PozZ);
+                }
+                sw.Close();
+                MessageBox.Show("Zapisałem do pliku.");
+            }
         }
     }
 }

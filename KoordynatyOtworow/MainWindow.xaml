@@ -32,6 +32,6 @@
         </Label>
         <TextBlock  Height="50" Width="215" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="24" FontStyle="Italic"> Czekaj, odczytuję ...</TextBlock>
         </Grid>
-        <TextBlock x:Name="TBplikRys" Margin="20,370,20,10">Plik rysunku:</TextBlock>
+        <TextBlock x:Name="TBplikRys" Margin="20,360,20,10" Text="Plik rysunku:"/>
     </Grid>
 </Window>
