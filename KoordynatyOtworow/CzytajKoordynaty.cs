@@ -65,23 +65,26 @@ namespace KoordynatyOtworow {
         public void Wczytaj_Koordynaty() {                          
             try {
                 TablicaOtworow = new List<Otwor>();
+                short i = 1;
                 AcadSelectionSet zestaw_el = rysunek_ACAD.SelectionSets.Add("zestaw_el");
-                Int16[] typ_filtra = new short[1];
-                typ_filtra[0] = 0;
-                object[] dane_filtra = new object[1];
-                dane_filtra[0]= "Circle";
+                Int16[] typ_filtra = new short[2] { 0, 8 };
+                //typ_filtra[0] = 0;
+                object[] dane_filtra = new object[2] { "Circle", "frezarka" };
+                //dane_filtra[0]= "Circle";
                 zestaw_el.Select(AcSelect.acSelectionSetAll,null,null, typ_filtra, dane_filtra);
-                foreach (AcadEntity el in zestaw_el) {
-                    if (el.Layer=="frezarka") {
-                        AcadCircle element = (AcadCircle)el;
+                foreach (AcadCircle el in zestaw_el) {
+                    //if (el.Layer=="frezarka") {
+                        //AcadCircle element = (AcadCircle)el;
                         Otwor otw = new Otwor(
-                            element.Diameter,
-                            element.Center[0],
-                            element.Center[1],
-                            element.Center[2]
+                            i,
+                            el.Diameter,
+                            el.Center[0],
+                            el.Center[1],
+                            el.Center[2]
                             );
                         TablicaOtworow.Add(otw);
-                    }
+                        i++;
+                    //}
                 }
                 rysunek_ACAD.Close(false);
             }
