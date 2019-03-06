@@ -16,7 +16,7 @@ namespace KoordynatyOtworow {
         #region POLA KLASY
         private AcadApplication acadApp;
         private AcadDocument rysunek_ACAD;
-        public List<Otwor> TablicaOtworow;
+        public List<Otwor> TablicaOtworow { get; set; }
         #endregion
 
         #region KONSTRUKTOR
@@ -66,7 +66,11 @@ namespace KoordynatyOtworow {
             try {
                 TablicaOtworow = new List<Otwor>();
                 AcadSelectionSet zestaw_el = rysunek_ACAD.SelectionSets.Add("zestaw_el");
-                zestaw_el.Select(AcSelect.acSelectionSetAll);
+                Int16[] typ_filtra = new short[1];
+                typ_filtra[0] = 0;
+                object[] dane_filtra = new object[1];
+                dane_filtra[0]= "Circle";
+                zestaw_el.Select(AcSelect.acSelectionSetAll,null,null, typ_filtra, dane_filtra);
                 foreach (AcadEntity el in zestaw_el) {
                     if (el.Layer=="frezarka") {
                         AcadCircle element = (AcadCircle)el;
