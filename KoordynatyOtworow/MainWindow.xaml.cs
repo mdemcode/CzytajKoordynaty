@@ -64,5 +64,10 @@ namespace KoordynatyOtworow
                 MessageBox.Show("Zapisałem do pliku.");
             }
         }
+
+        private void ButtonTest_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

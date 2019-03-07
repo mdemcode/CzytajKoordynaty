@@ -25,6 +25,7 @@
         <StackPanel Grid.Column="1">
             <Button x:Name="ButtonCzytajKoordynaty" Height="50" Width="150" Margin="0,30,0,0" Click="ButtonCzytajKoordynaty_Click">Czytaj Koordynaty</Button>
             <Button x:Name="ButtonZapiszDoPliku" Height="50" Width="150" Margin="0,30,0,0" Click="ButtonZapiszDoPliku_Click" >Zapisz do pliku</Button>
+            <Button x:Name="ButtonTest" Height="50" Width="150" Margin="0,30,0,0" Click="ButtonTest_Click" >Testowy</Button>
         </StackPanel>
         <Grid x:Name="grid_info" Visibility="Hidden" >
             <Label x:Name="LabelLaduje" Height="400" Width="500" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="24" FontStyle="Italic">
