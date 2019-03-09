@@ -2,7 +2,8 @@
 using System.Windows;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using AutoCAD;
+using Autodesk.AutoCAD.Interop;
+using Autodesk.AutoCAD.Interop.Common;
 
 namespace KoordynatyOtworow { 
 

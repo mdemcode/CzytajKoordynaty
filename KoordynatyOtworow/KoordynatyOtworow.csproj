@@ -35,6 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autodesk.AutoCAD.Interop, Version=21.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoCAD-2017.Net.Interop.x64.1.0.0\lib\net46\Autodesk.AutoCAD.Interop.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autodesk.AutoCAD.Interop.Common, Version=21.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoCAD-2017.Net.Interop.x64.1.0.0\lib\net46\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -89,6 +99,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -98,15 +109,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AutoCAD">
-      <Guid>{891DBC3B-CF8B-4F7E-BF55-D9599E4B622C}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
