@@ -28,13 +28,14 @@ namespace KoordynatyOtworow {
         #region METODY
         private bool Przechwyc_AutoCAD() {
             try {
-                acadApp = (AcadApplication)Marshal.GetActiveObject("AutoCAD.Application");
+                acadApp = (AcadApplication) Marshal.GetActiveObject("AutoCAD.Application.20");
                 return true;
             }
-            catch {
+            catch (Exception e2) {
+                MessageBox.Show(e2.Message);
                 try {
                     // Create a new instance of AutoCAD -> NIE ZAWSZE DZIAŁA PRAWIDŁOWO!!!
-                    acadApp = (AcadApplication)Activator.CreateInstance(Type.GetTypeFromProgID("AutoCAD.Application"), true);
+                    acadApp = Activator.CreateInstance(Type.GetTypeFromProgID("AutoCAD.Application.20"), true) as AcadApplication;
                     acadApp.Visible = true;
                     MessageBox.Show("Otworzyłem AutoCad`a"); // <- wstrzymuje działanie programu do czasu pełnego otworzenia AutoCADa
                     return true;
@@ -48,12 +49,13 @@ namespace KoordynatyOtworow {
 
         private bool Otworz_Rysunek(string adr) {
             try {
+                
                 AcadDocuments listaRys = acadApp.Documents;
                 rysunek_ACAD = listaRys.Open(adr);
                 return true;
             }
-            catch {
-                MessageBox.Show("Nie udało się otworzyć rysunku! \n Spróbuj jeszcze raz.");
+            catch (Exception e1) {
+                MessageBox.Show("Nie udało się otworzyć rysunku! \n Spróbuj jeszcze raz. "+e1.Message);
                 return false;
             }
         }

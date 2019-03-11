@@ -67,7 +67,7 @@ namespace KoordynatyOtworow
 
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
