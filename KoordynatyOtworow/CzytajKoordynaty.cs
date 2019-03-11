@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
+//using Microsoft.Win32;
 using AutoCAD;
 
 namespace KoordynatyOtworow { 
