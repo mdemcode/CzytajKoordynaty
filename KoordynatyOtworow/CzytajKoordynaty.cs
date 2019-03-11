@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Windows;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
-using Autodesk.AutoCAD.Interop;
-using Autodesk.AutoCAD.Interop.Common;
+using Microsoft.Win32;
+using AutoCAD;
 
 namespace KoordynatyOtworow { 
 
@@ -28,14 +32,13 @@ namespace KoordynatyOtworow {
         #region METODY
         private bool Przechwyc_AutoCAD() {
             try {
-                acadApp = (AcadApplication) Marshal.GetActiveObject("AutoCAD.Application.20");
+                acadApp = (AcadApplication)Marshal.GetActiveObject("AutoCAD.Application");
                 return true;
             }
-            catch (Exception e2) {
-                MessageBox.Show(e2.Message);
+            catch {
                 try {
                     // Create a new instance of AutoCAD -> NIE ZAWSZE DZIAŁA PRAWIDŁOWO!!!
-                    acadApp = Activator.CreateInstance(Type.GetTypeFromProgID("AutoCAD.Application.20"), true) as AcadApplication;
+                    acadApp = (AcadApplication)Activator.CreateInstance(Type.GetTypeFromProgID("AutoCAD.Application"), true);
                     acadApp.Visible = true;
                     MessageBox.Show("Otworzyłem AutoCad`a"); // <- wstrzymuje działanie programu do czasu pełnego otworzenia AutoCADa
                     return true;
@@ -49,13 +52,12 @@ namespace KoordynatyOtworow {
 
         private bool Otworz_Rysunek(string adr) {
             try {
-                
-                AcadDocuments listaRys = acadApp.Documents;
-                rysunek_ACAD = listaRys.Open(adr);
+            AcadDocuments listaRys = acadApp.Documents;
+            rysunek_ACAD = listaRys.Open(adr);
                 return true;
             }
-            catch (Exception e1) {
-                MessageBox.Show("Nie udało się otworzyć rysunku! \n Spróbuj jeszcze raz. "+e1.Message);
+            catch {
+                MessageBox.Show("Nie udało się otworzyć rysunku! \n Spróbuj jeszcze raz.");
                 return false;
             }
         }
